@@ -1,5 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Application xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:d="http://xamarin.com/schemas/2014/forms/design" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="Coffeeffee.App">
     <Application.Resources>
+        <ResourceDictionary>
+            <Color x:Key="white">#FFFFFF</Color>
+            <Color x:Key="brown">#A98278</Color>
+            <Color x:Key="green">#2E8A8F</Color>
+
+            <Style x:Key="product_title" TargetType="Label">
+                <Setter Property="LineBreakMode" Value="TailTruncation"/>
+                <Setter Property="TextColor" Value="{StaticResource green}"/>
+                <Setter Property="VerticalTextAlignment" Value="Center"/>
+                <Setter Property="FontFamily" Value="JosefinSans-Bold"/>
+                <Setter Property="FontSize" Value="28"/>
+            </Style>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

@@ -1,7 +1,112 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:d="http://xamarin.com/schemas/2014/forms/design" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="Coffeeffee.MainPage">
-    <StackLayout>
+<ContentPage BackgroundColor="{StaticResource green}" xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" x:Class="Coffeeffee.MainPage"
+             xmlns:local="clr-namespace:Coffeeffee"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             xmlns:skia="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
+             ios:Page.UseSafeArea="true">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="120" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="64" />
+            <RowDefinition Height="100" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Label Text="All Products" Grid.ColumnSpan="2" VerticalOptions="Center" FontFamily="JosefinSans-Bold"
+               TextColor="#FFFFFF" FontSize="32" Margin="32,0,0,0" />
+
+        <Button BackgroundColor="#FFFFFF" FontFamily="Icons" HeightRequest="52" WidthRequest="52" HorizontalOptions="End"
+                VerticalOptions="Center" Grid.Column="2" CornerRadius="8" Margin="0,0,32,0"
+                Text="{x:Static local:Icons.IconShopping}" TextColor="{StaticResource green}" FontSize="20"/>
+
         <!-- Place new controls here -->
-        <Label Text="Welcome to Xamarin.Forms!" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" />
-    </StackLayout>
+        <Label Margin="32,0" Grid.ColumnSpan="3" LineHeight="1.4" Grid.Row="2" FontSize="16"
+               HorizontalTextAlignment="Center" FontFamily="JosefinSans-Regular" HorizontalOptions="Center"
+               VerticalOptions="CenterAndExpand">
+            <Label.FormattedText>
+                <FormattedString>
+                    <Span TextColor="#FFFFFF" Text="Use your voucher code &amp; Get 25% off now. Follow us on Instagram &amp;" />
+                    <Span TextColor="#000000" Text=" Get your offer voucher code from here !!!" />
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>
+
+        <BoxView Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="4" VerticalOptions="End" BackgroundColor="#ffffff" Margin="0,0,0,-40" HeightRequest="40" />
+
+        <skia:SKCanvasView Grid.Row="0" Grid.RowSpan="4" VerticalOptions="End" HeightRequest="200"
+                           Grid.ColumnSpan="3" PaintSurface="SKCanvasView_PaintSurface">
+
+        </skia:SKCanvasView>
+
+
+        <CarouselView ItemsSource="{Binding .}" Grid.Row="1" Grid.ColumnSpan="3" PeekAreaInsets="32,0,96,0" HorizontalScrollBarVisibility="Never" >
+            <CarouselView.ItemsLayout>
+                <LinearItemsLayout Orientation="Horizontal" ItemSpacing="24" />
+            </CarouselView.ItemsLayout>
+            <CarouselView.ItemTemplate>
+                <DataTemplate x:DataType="local:Coffee">
+                    <Frame HasShadow="False" Padding="20" CornerRadius="20" BackgroundColor="#FFFFFF">
+                        <Grid RowSpacing="16">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="48" />
+                                <RowDefinition Height="48" />
+                                <RowDefinition Height="48" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Margin="-24,-24,-24,0" Source="{Binding Image}" Grid.ColumnSpan="2" Aspect="AspectFill" />
+                            <Label Style="{StaticResource product_title}" Grid.ColumnSpan="2" Grid.Row="1" Text="{Binding Title}" />
+                            <Label Grid.Row="2" FontFamily="JosefinSans-Bold" FontSize="40" TextColor="{StaticResource green}" Text="{Binding Price, StringFormat='{0:c}'}" />
+
+                            <Frame HasShadow="False" VerticalOptions="Start" Padding="16,0" HeightRequest="40" BackgroundColor="#F1DFBF" Grid.Row="2" Grid.Column="1">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="20" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="20" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <Button TextColor="{StaticResource green}" FontSize="24" Text="-" VerticalOptions="Center"
+                                        HorizontalOptions="Center" />
+                                    <Label FontFamily="JosefinSans-Bold" TextColor="{StaticResource green}" Text="{Binding Quantity}"
+                                       VerticalOptions="Center" HorizontalOptions="Center" Grid.Column="1" VerticalTextAlignment="Center"/>
+                                    <Button TextColor="{StaticResource green}" FontSize="24" Text="+" VerticalOptions="Center"
+                                        HorizontalOptions="Center" Grid.Column="2" />
+                                </Grid>
+                            </Frame>
+
+                            <Button Grid.Row="3" Grid.ColumnSpan="2" FontSize="18" Text="Add To Cart" BackgroundColor="{StaticResource brown}" TextColor="{StaticResource white}" FontFamily="JosefinSans-Bold" />
+                        </Grid>
+                    </Frame>
+                </DataTemplate>
+            </CarouselView.ItemTemplate>
+        </CarouselView>
+
+
+        <Button Grid.Row="3" Margin="20,0,0,0" FontFamily="Icons" BackgroundColor="#FFFFFF" HeightRequest="48" WidthRequest="48"
+                TextColor="{StaticResource green}" Text="{x:Static local:Icons.IconCoffeeBeans}"
+                HorizontalOptions="Center" VerticalOptions="Center" FontSize="20" Grid.Column="0" CornerRadius="24" />
+
+        <Button Grid.Row="3" FontFamily="Icons" BackgroundColor="#FFFFFF" HeightRequest="64" WidthRequest="64"
+                TextColor="{StaticResource green}" Text="{x:Static local:Icons.IconPaw}"
+                HorizontalOptions="Center" VerticalOptions="Center" FontSize="24" Grid.Column="1" CornerRadius="32" />
+
+        <Button Grid.Row="3" Margin="0,0,20,0" FontFamily="Icons" BackgroundColor="#FFFFFF" HeightRequest="48" WidthRequest="48"
+                TextColor="{StaticResource green}" Text="{x:Static local:Icons.IconBuyMeACoffee}"
+                HorizontalOptions="Center" VerticalOptions="Center" FontSize="20" Grid.Column="2" CornerRadius="24" />
+
+    </Grid>
 </ContentPage>
