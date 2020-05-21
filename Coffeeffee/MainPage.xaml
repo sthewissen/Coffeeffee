@@ -4,10 +4,13 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" x:Class="Coffeeffee.MainPage"
-             xmlns:local="clr-namespace:Coffeeffee"
+             xmlns:models="clr-namespace:Coffeeffee.Models"
+             xmlns:icons="clr-namespace:Coffeeffee.Styles"
+             xmlns:local="clr-namespace:Coffeeffee.Controls"
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
              xmlns:skia="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
-             ios:Page.UseSafeArea="true">
+             xmlns:sharedTransitions="clr-namespace:Plugin.SharedTransitions;assembly=Plugin.SharedTransitions"
+             ios:Page.UseSafeArea="true" NavigationPage.HasNavigationBar="False">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="120" />
@@ -26,7 +29,7 @@
 
         <Button BackgroundColor="#FFFFFF" FontFamily="Icons" HeightRequest="52" WidthRequest="52" HorizontalOptions="End"
                 VerticalOptions="Center" Grid.Column="2" CornerRadius="8" Margin="0,0,32,0"
-                Text="{x:Static local:Icons.IconShopping}" TextColor="{StaticResource green}" FontSize="20"/>
+                Text="{x:Static icons:Icons.IconShopping}" TextColor="{StaticResource green}" FontSize="20"/>
 
         <!-- Place new controls here -->
         <Label Margin="32,0" Grid.ColumnSpan="3" LineHeight="1.4" Grid.Row="2" FontSize="16"
@@ -48,13 +51,14 @@
         </skia:SKCanvasView>
 
 
-        <CarouselView ItemsSource="{Binding .}" Grid.Row="1" Grid.ColumnSpan="3" PeekAreaInsets="32,0,96,0" HorizontalScrollBarVisibility="Never" >
+        <CarouselView ItemsSource="{Binding .}" Grid.Row="1" Grid.ColumnSpan="3" PeekAreaInsets="32,0,96,0"
+                      HorizontalScrollBarVisibility="Never">
             <CarouselView.ItemsLayout>
                 <LinearItemsLayout Orientation="Horizontal" ItemSpacing="24" />
             </CarouselView.ItemsLayout>
             <CarouselView.ItemTemplate>
-                <DataTemplate x:DataType="local:Coffee">
-                    <Frame HasShadow="False" Padding="20" CornerRadius="20" BackgroundColor="#FFFFFF">
+                <DataTemplate x:DataType="models:Coffee">
+                    <Frame HasShadow="False" Padding="20" CornerRadius="20" BackgroundColor="{StaticResource white}">
                         <Grid RowSpacing="16">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="*" />
@@ -67,26 +71,16 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
-                            <Image Margin="-24,-24,-24,0" Source="{Binding Image}" Grid.ColumnSpan="2" Aspect="AspectFill" />
+                            <Image Margin="-24,-24,-24,0" Source="{Binding Image}" Grid.ColumnSpan="2" Aspect="AspectFill"
+                                   sharedTransitions:Transition.Name="CoffeeImage" sharedTransitions:Transition.Group="{Binding Title}">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="Image_Tapped" />
+                                </Image.GestureRecognizers>
+                            </Image>
                             <Label Style="{StaticResource product_title}" Grid.ColumnSpan="2" Grid.Row="1" Text="{Binding Title}" />
                             <Label Grid.Row="2" FontFamily="JosefinSans-Bold" FontSize="40" TextColor="{StaticResource green}" Text="{Binding Price, StringFormat='{0:c}'}" />
 
-                            <Frame HasShadow="False" VerticalOptions="Start" Padding="16,0" HeightRequest="40" BackgroundColor="#F1DFBF" Grid.Row="2" Grid.Column="1">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="20" />
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="20" />
-                                    </Grid.ColumnDefinitions>
-
-                                    <Button TextColor="{StaticResource green}" FontSize="24" Text="-" VerticalOptions="Center"
-                                        HorizontalOptions="Center" />
-                                    <Label FontFamily="JosefinSans-Bold" TextColor="{StaticResource green}" Text="{Binding Quantity}"
-                                       VerticalOptions="Center" HorizontalOptions="Center" Grid.Column="1" VerticalTextAlignment="Center"/>
-                                    <Button TextColor="{StaticResource green}" FontSize="24" Text="+" VerticalOptions="Center"
-                                        HorizontalOptions="Center" Grid.Column="2" />
-                                </Grid>
-                            </Frame>
+                            <local:Stepper Grid.Row="2" Grid.Column="1" WidthRequest="120" HorizontalOptions="Start" />
 
                             <Button Grid.Row="3" Grid.ColumnSpan="2" FontSize="18" Text="Add To Cart" BackgroundColor="{StaticResource brown}" TextColor="{StaticResource white}" FontFamily="JosefinSans-Bold" />
                         </Grid>
@@ -97,15 +91,15 @@
 
 
         <Button Grid.Row="3" Margin="20,0,0,0" FontFamily="Icons" BackgroundColor="#FFFFFF" HeightRequest="48" WidthRequest="48"
-                TextColor="{StaticResource green}" Text="{x:Static local:Icons.IconCoffeeBeans}"
+                TextColor="{StaticResource green}" Text="{x:Static icons:Icons.IconCoffeeBeans}"
                 HorizontalOptions="Center" VerticalOptions="Center" FontSize="20" Grid.Column="0" CornerRadius="24" />
 
         <Button Grid.Row="3" FontFamily="Icons" BackgroundColor="#FFFFFF" HeightRequest="64" WidthRequest="64"
-                TextColor="{StaticResource green}" Text="{x:Static local:Icons.IconPaw}"
+                TextColor="{StaticResource green}" Text="{x:Static icons:Icons.IconPaw}"
                 HorizontalOptions="Center" VerticalOptions="Center" FontSize="24" Grid.Column="1" CornerRadius="32" />
 
         <Button Grid.Row="3" Margin="0,0,20,0" FontFamily="Icons" BackgroundColor="#FFFFFF" HeightRequest="48" WidthRequest="48"
-                TextColor="{StaticResource green}" Text="{x:Static local:Icons.IconBuyMeACoffee}"
+                TextColor="{StaticResource green}" Text="{x:Static icons:Icons.IconBuyMeACoffee}"
                 HorizontalOptions="Center" VerticalOptions="Center" FontSize="20" Grid.Column="2" CornerRadius="24" />
 
     </Grid>

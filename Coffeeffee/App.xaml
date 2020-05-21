@@ -13,6 +13,16 @@
                 <Setter Property="FontFamily" Value="JosefinSans-Bold"/>
                 <Setter Property="FontSize" Value="28"/>
             </Style>
+
+            <Style x:Key="product_title_large" BasedOn="{StaticResource product_title}" TargetType="Label">
+                <Setter Property="FontSize" Value="36"/>
+            </Style>
+
+            <Style x:Key="product_subtitle" TargetType="Label">
+                <Setter Property="TextColor" Value="Orange"/>
+                <Setter Property="FontFamily" Value="JosefinSans-Regular"/>
+                <Setter Property="FontSize" Value="16"/>
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

@@ -1,6 +1,5 @@
-﻿using System;
+﻿using Plugin.SharedTransitions;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace Coffeeffee
 {
@@ -10,7 +9,7 @@ namespace Coffeeffee
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            MainPage = new SharedTransitionNavigationPage(new MainPage());
         }
 
         protected override void OnStart()

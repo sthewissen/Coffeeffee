@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using SkiaSharp;
+using Coffeeffee.Models;
+using Plugin.SharedTransitions;
 
 namespace Coffeeffee
 {
@@ -23,9 +25,12 @@ namespace Coffeeffee
 
             BindingContext = new List<Coffee>
             {
-                new Coffee { Title="XamaCoffee", Price=3.99, Quantity = 1, Image="xamacoffee" },
-                new Coffee { Title="XamaCoffee Deluxe", Price=5.99, Quantity = 1 , Image="xamacoffee"},
-                new Coffee { Title="XamaCoffee Super Deluxe", Price=10.99, Quantity = 1, Image="xamacoffee" },
+                new Coffee { Title="XamaCoffee", Price=3.99, Quantity = 1, Image="xamacoffee",
+                    Subtitle="This is the best coffee on Hawaii!",
+                    Description="Coffee brewn on the foothills of Maui. It's nutty aftertaste comes from Depechie's cat, that ate it first. Apparently. Gerald Versluis hops by in a bunny suit."
+                },
+                new Coffee { Title="XamaCoffee Deluxe", Price=5.99, Quantity = 1 , Image="xamacoffee", Subtitle="This is the bestest coffee on Hawaii!"},
+                new Coffee { Title="XamaCoffee Super Deluxe", Price=10.99, Quantity = 1, Image="xamacoffee", Subtitle="This is the bestestest coffee on Hawaii!" },
             };
         }
 
@@ -51,6 +56,16 @@ namespace Coffeeffee
             canvas.DrawPath(wavePath, whitePaint);
 
             canvas.Save();
+        }
+
+        async void Image_Tapped(System.Object sender, System.EventArgs e)
+        {
+            var model = (sender as Image).BindingContext as Coffee;
+
+            //this is required in order to pass the views to animate
+            SharedTransitionNavigationPage.SetTransitionSelectedGroup(this, model.Title);
+
+            await Navigation.PushAsync(new DetailPage(model));
         }
     }
 }
