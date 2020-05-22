@@ -53,13 +53,16 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="4.5.0.356" />
+    <PackageReference Include="Xamarin.Forms" Version="4.6.0.800" />
     <PackageReference Include="Xamarin.Essentials" Version="1.5.3.2" />
     <PackageReference Include="SkiaSharp.Views.Forms">
       <Version>1.68.2.1</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Plugin.SharedTransitions">
       <Version>2.0.2</Version>
+    </PackageReference>
+    <PackageReference Include="CoordinatorLayout.XamarinForms">
+      <Version>1.2.0</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
