@@ -34,29 +34,29 @@ namespace Coffeeffee
             };
         }
 
-        void SKCanvasView_PaintSurface(System.Object sender, SkiaSharp.Views.Forms.SKPaintSurfaceEventArgs e)
-        {
-            var canvas = e.Surface.Canvas;
+        //void SKCanvasView_PaintSurface(System.Object sender, SkiaSharp.Views.Forms.SKPaintSurfaceEventArgs e)
+        //{
+        //    var canvas = e.Surface.Canvas;
 
-            canvas.Clear();
+        //    canvas.Clear();
 
-            var pathInfo = wavePath.Bounds;
-            var width = e.Info.Width;
-            var height = e.Info.Height;
+        //    var pathInfo = wavePath.Bounds;
+        //    var width = e.Info.Width;
+        //    var height = e.Info.Height;
 
-            canvas.Translate(width / 2f, height / 2f);
+        //    canvas.Translate(width / 2f, height / 2f);
 
-            var xRatio = width / pathInfo.Width;
-            var yRatio = height / pathInfo.Height;
-            var ratio = Math.Min(xRatio, yRatio);
+        //    var xRatio = width / pathInfo.Width;
+        //    var yRatio = height / pathInfo.Height;
+        //    var ratio = Math.Min(xRatio, yRatio);
 
-            canvas.Scale(ratio);
-            canvas.Translate(-wavePath.Bounds.MidX, 0);
+        //    canvas.Scale(ratio);
+        //    canvas.Translate(-wavePath.Bounds.MidX, 0);
 
-            canvas.DrawPath(wavePath, whitePaint);
+        //    canvas.DrawPath(wavePath, whitePaint);
 
-            canvas.Save();
-        }
+        //    canvas.Save();
+        //}
 
         async void Image_Tapped(System.Object sender, System.EventArgs e)
         {

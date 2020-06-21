@@ -9,6 +9,8 @@ namespace Coffeeffee
         {
             InitializeComponent();
 
+            Device.SetFlags(new string[] { "Shapes_Experimental" });
+
             MainPage = new SharedTransitionNavigationPage(new MainPage());
         }
 

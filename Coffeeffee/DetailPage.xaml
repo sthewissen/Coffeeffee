@@ -20,42 +20,45 @@
                 <RowDefinition Height="100" />
             </Grid.RowDefinitions>
 
-            <Image Source="{Binding Image}" Aspect="AspectFill" HeightRequest="400" Grid.Row="0" Grid.RowSpan="2"
-                   Grid.ColumnSpan="3" Margin="0,-44,0,0" sharedTransitions:Transition.Name="CoffeeImage" />
+            <Frame Grid.Row="0" Grid.RowSpan="2" Grid.ColumnSpan="3" Padding="0" Margin="0,-44,0,0" HasShadow="False" CornerRadius="40">
+                <Image HeightRequest="400" Source="{Binding Image}" Aspect="AspectFill" sharedTransitions:Transition.Name="CoffeeImage" />
+            </Frame>
 
             <Button BackgroundColor="{StaticResource white}" Grid.ColumnSpan="3" FontFamily="Icons" HeightRequest="52" WidthRequest="52" HorizontalOptions="Start"
                 VerticalOptions="Center" CornerRadius="8" Margin="32,0,0,0" Clicked="Back_Clicked"
                 Text="{x:Static icons:Icons.IconBack}" TextColor="{StaticResource green}" FontSize="20"/>
 
-            <Grid Grid.Row="2" Grid.ColumnSpan="3" Padding="40,32" ColumnSpacing="12">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="48" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="120" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
+            <ScrollView Grid.Row="2" Grid.ColumnSpan="3" >
+                <Grid Padding="40,32" ColumnSpacing="12">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="48" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="120" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
 
-                <Label Grid.ColumnSpan="2" Grid.Row="0" Style="{StaticResource product_title_large}"  Text="{Binding Title}" />
+                    <Label Grid.ColumnSpan="2" Grid.Row="0" Style="{StaticResource product_title_large}"  Text="{Binding Title}" />
 
-                <Label Style="{StaticResource product_subtitle}" Grid.ColumnSpan="2" Grid.Row="1" Margin="0,0,0,24" Text="{Binding Subtitle}" />
+                    <Label Style="{StaticResource product_subtitle}" Grid.ColumnSpan="2" Grid.Row="1" Margin="0,0,0,24" Text="{Binding Subtitle}" />
 
-                <Label Grid.Column="0" Grid.Row="2" FontFamily="JosefinSans-Bold" FontSize="40" TextColor="{StaticResource green}" Text="{Binding Price, StringFormat='{0:c}'}" />
+                    <Label Grid.Column="0" Grid.Row="2" FontFamily="JosefinSans-Bold" FontSize="40" TextColor="{StaticResource green}" Text="{Binding Price, StringFormat='{0:c}'}" />
 
-                <local:Stepper Grid.Row="2" Grid.Column="1" WidthRequest="120" HorizontalOptions="Start" Margin="0,0,0,24" />
+                    <local:Stepper Grid.Row="2" Grid.Column="1" WidthRequest="120" HorizontalOptions="Start" Margin="0,0,0,24" />
 
-                <Label Grid.Row="3" Grid.ColumnSpan="2" Text="{Binding Description}" FontFamily="JosefinSans-Regular" FontSize="16" LineHeight="1.2" />
-            </Grid>
+                    <Label Grid.Row="3" Grid.ColumnSpan="2" Text="{Binding Description}" FontFamily="JosefinSans-Regular" FontSize="16" LineHeight="1.2" />
+                </Grid>
+            </ScrollView>
 
             <BoxView Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="4" VerticalOptions="End" BackgroundColor="{StaticResource green}" Margin="0,0,0,-40" HeightRequest="40" />
 
-            <skia:SKCanvasView Grid.Row="0" Grid.RowSpan="4" VerticalOptions="End" HeightRequest="200"
-                           Grid.ColumnSpan="3" PaintSurface="SKCanvasView_PaintSurface">
-
-            </skia:SKCanvasView>
+            <Grid Grid.Row="3" Grid.ColumnSpan="3">
+                <Path Fill="{StaticResource green}" HorizontalOptions="Fill" VerticalOptions="Fill" Aspect="UniformToFill" 
+                  Data="M615.59,178.35c-86.88,0-129.26-89.18-129.26-89.18S435.14,14,375,14,263.63,89.17,263.63,89.17s-42.2,89.18-129.26,89.18S0,0,0,0V200H750V0S702.61,178.35,615.59,178.35Z" />
+            </Grid>
 
             <Button Grid.Row="3" Margin="20,0,0,0" FontFamily="Icons" BackgroundColor="{StaticResource green}" HeightRequest="48" WidthRequest="48"
                 TextColor="{StaticResource white}" Text="{x:Static icons:Icons.IconCoffeeBeans}"

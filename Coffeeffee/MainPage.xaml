@@ -8,21 +8,9 @@
              xmlns:icons="clr-namespace:Coffeeffee.Styles"
              xmlns:local="clr-namespace:Coffeeffee.Controls"
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
-             xmlns:skia="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
              xmlns:sharedTransitions="clr-namespace:Plugin.SharedTransitions;assembly=Plugin.SharedTransitions"
              ios:Page.UseSafeArea="true" NavigationPage.HasNavigationBar="False">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="120" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="64" />
-            <RowDefinition Height="100" />
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
+    <Grid Grid.RowDefinitions="120,*,64,100" ColumnDefinitions="*,*,*">
 
         <Label Text="All Products" Grid.ColumnSpan="2" VerticalOptions="Center" FontFamily="JosefinSans-Bold"
                TextColor="#FFFFFF" FontSize="32" Margin="32,0,0,0" />
@@ -31,7 +19,6 @@
                 VerticalOptions="Center" Grid.Column="2" CornerRadius="8" Margin="0,0,32,0"
                 Text="{x:Static icons:Icons.IconShopping}" TextColor="{StaticResource green}" FontSize="20"/>
 
-        <!-- Place new controls here -->
         <Label Margin="32,0" Grid.ColumnSpan="3" LineHeight="1.4" Grid.Row="2" FontSize="16"
                HorizontalTextAlignment="Center" FontFamily="JosefinSans-Regular" HorizontalOptions="Center"
                VerticalOptions="CenterAndExpand">
@@ -45,11 +32,11 @@
 
         <BoxView Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="4" VerticalOptions="End" BackgroundColor="#ffffff" Margin="0,0,0,-40" HeightRequest="40" />
 
-        <skia:SKCanvasView Grid.Row="0" Grid.RowSpan="4" VerticalOptions="End" HeightRequest="200"
-                           Grid.ColumnSpan="3" PaintSurface="SKCanvasView_PaintSurface">
 
-        </skia:SKCanvasView>
-
+        <Grid Grid.Row="3" Grid.ColumnSpan="3">
+            <Path Fill="#FFFFFF" HorizontalOptions="Fill" VerticalOptions="Fill" Aspect="UniformToFill" 
+                  Data="M615.59,178.35c-86.88,0-129.26-89.18-129.26-89.18S435.14,14,375,14,263.63,89.17,263.63,89.17s-42.2,89.18-129.26,89.18S0,0,0,0V200H750V0S702.61,178.35,615.59,178.35Z" />
+        </Grid>
 
         <CarouselView ItemsSource="{Binding .}" Grid.Row="1" Grid.ColumnSpan="3" PeekAreaInsets="32,0,96,0"
                       HorizontalScrollBarVisibility="Never">
@@ -58,7 +45,7 @@
             </CarouselView.ItemsLayout>
             <CarouselView.ItemTemplate>
                 <DataTemplate x:DataType="models:Coffee">
-                    <Frame HasShadow="False" Padding="20" CornerRadius="20" BackgroundColor="{StaticResource white}">
+                    <Frame HasShadow="False" IsClippedToBounds="True" Padding="20" CornerRadius="20" BackgroundColor="{StaticResource white}">
                         <Grid RowSpacing="16">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="*" />
@@ -71,8 +58,9 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
-                            <Image Margin="-24,-24,-24,0" Source="{Binding Image}" Grid.ColumnSpan="2" Aspect="AspectFill"
-                                   sharedTransitions:Transition.Name="CoffeeImage" sharedTransitions:Transition.Group="{Binding Title}">
+                            <Image Margin="-24,-24,-24,0" Source="{Binding Image}" Grid.ColumnSpan="2" Aspect="AspectFill"                                   
+                            sharedTransitions:Transition.Name="CoffeeImage"
+                            sharedTransitions:Transition.Group="{Binding Title}">
                                 <Image.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="Image_Tapped" />
                                 </Image.GestureRecognizers>
